@@ -1,3 +1,5 @@
+package AbstractUnit;
+
 abstract public class AbstractUnit{
     protected String name;
     protected int armor;
@@ -15,7 +17,7 @@ abstract public class AbstractUnit{
 
     @Override
     public String toString() {
-        return getClass().getName();
+        return this.name;
     }
 
     protected void displayInfo(){

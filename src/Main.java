@@ -33,6 +33,14 @@
 *
 * */
 
+import Mage.Monk;
+import Mage.Witch;
+import Shooters.Crossbowman;
+import Shooters.Sniper;
+import Warriors.Peasant;
+import Warriors.Rogue;
+import Warriors.Spearman;
+
 public class Main {
     public static void main(String[] args) {
         Peasant peasant1 = new Peasant("Bob", 1, "sickle", 10, 3, 1,1,1);

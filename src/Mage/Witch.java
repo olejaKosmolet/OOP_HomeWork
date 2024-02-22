@@ -1,4 +1,7 @@
-public class Witch extends AbstractUnit{
+package Mage;
+import AbstractUnit.AbstractUnit;
+
+public class Witch extends AbstractUnit {
     int mana;
     String element;
     int numberOfWordsOfPower;

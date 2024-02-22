@@ -1,4 +1,7 @@
-public class Spearman extends AbstractUnit{
+package Warriors;
+import AbstractUnit.AbstractUnit;
+
+public class Spearman extends AbstractUnit {
     int force;
     int evasion;
     int protection;

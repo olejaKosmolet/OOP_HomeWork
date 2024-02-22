@@ -1,4 +1,7 @@
-public class Monk extends AbstractUnit{
+package Mage;
+import AbstractUnit.AbstractUnit;
+
+public class Monk extends AbstractUnit {
     int mana;
     int endurance;
     int numberOfWordsOfPower;

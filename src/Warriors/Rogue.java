@@ -1,4 +1,7 @@
-public class Rogue extends AbstractUnit{
+package Warriors;
+import AbstractUnit.AbstractUnit;
+
+public class Rogue extends AbstractUnit {
     int dexterity;
     int endurance;
     int evasion;

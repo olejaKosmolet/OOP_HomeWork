@@ -1,4 +1,7 @@
-public class Crossbowman extends  AbstractUnit{
+package Shooters;
+import AbstractUnit.AbstractUnit;
+
+public class Crossbowman extends AbstractUnit {
     int rechargeSpeed;
     int numberOfShells;
     int accuracy;

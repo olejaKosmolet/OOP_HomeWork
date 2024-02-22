@@ -1,3 +1,6 @@
+package Warriors;
+import AbstractUnit.AbstractUnit;
+
 public class Peasant extends AbstractUnit {
     int force;
     int endurance;

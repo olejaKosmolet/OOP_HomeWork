@@ -1,4 +1,7 @@
-public class Sniper extends AbstractUnit{
+package Shooters;
+import AbstractUnit.AbstractUnit;
+
+public class Sniper extends AbstractUnit {
     int dexterity;
     int numberOfShells;
     int accuracy;
