@@ -2,6 +2,8 @@ package Game.Shooters;
 
 import Game.AbstractUnit.AbstractUnit;
 
+import java.util.List;
+
 public class Sniper extends AbstractUnit {
     int dexterity;
     int numberOfShells;
@@ -23,6 +25,24 @@ public class Sniper extends AbstractUnit {
     @Override
     protected double getDmg(double hpMate, int damageEnemy) {
         return super.getDmg(hpMate, damageEnemy);
+    }
+
+    @Override
+    protected AbstractUnit searchForEnemy(List<AbstractUnit> teamNum, float minDistance){
+        AbstractUnit nearestEnemy = null;
+
+        if (teamNum.isEmpty()){
+            return null;
+        }
+// при проверке разницы между дистанцией и минимальным рэнжем атаки добавить && и проверить жив ли таргет
+        for (AbstractUnit enemy : teamNum){
+            float distance = position.distanceToTarget(enemy.position);
+            if (distance < minDistance){
+                minDistance = distance;
+                nearestEnemy = enemy;
+            }
+        }
+        return nearestEnemy;
     }
 
 }

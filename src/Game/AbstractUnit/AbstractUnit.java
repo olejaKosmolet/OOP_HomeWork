@@ -7,7 +7,7 @@ import java.util.List;
 
 abstract public class AbstractUnit implements MyInterface {
 
-    protected Place position;
+    public Place position;
     protected String name;
     protected int armor;
     protected String weapon;
