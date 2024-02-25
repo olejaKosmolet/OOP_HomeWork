@@ -120,21 +120,9 @@ public class Main {
             }
         }
 
-        /*for (AbstractUnit unit : team1){
-            System.out.println(unit);
-        }
-        for (AbstractUnit unit : team2){
-            System.out.println(unit);
-        }*/
-
         all.addAll(team1);
         all.addAll(team2);
-        all.sort(new Comparator<AbstractUnit>() {
-            @Override
-            public int compare(AbstractUnit o1, AbstractUnit o2) {
-                return o2.getSpeed() - o1.getSpeed();
-            }
-        });
+        all.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
 
         all.forEach(n -> n.print());
 

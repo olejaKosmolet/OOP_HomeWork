@@ -32,7 +32,7 @@ public abstract class AbstractUnit implements InterfaceStep{
 
     public void print() {
         System.out.printf("\nCLASS: %s; NAME: %s; HP: %d; WEAPON: %s; DAMAGE: %d; SPEED: %d; ARMOR: %d; POSITION: "
-                + position, className, name, hp, weapon, damage, speed, armor);
+                + position + "\n", className, name, hp, weapon, damage, speed, armor);
     }
 
     public void getHit(float damage){
