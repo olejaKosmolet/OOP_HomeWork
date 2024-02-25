@@ -44,10 +44,7 @@ import Game.Warriors.Peasant;
 import Game.Warriors.Rogue;
 import Game.Warriors.Spearman;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -70,6 +67,8 @@ public class Main {
         Random rand = new Random();
         List<AbstractUnit> team1 = new ArrayList<>();
         List<AbstractUnit> team2 = new ArrayList<>();
+        List<AbstractUnit> all = new ArrayList<>();
+
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < quantity; i++) {
             int value = rand.nextInt(7);
@@ -87,7 +86,7 @@ public class Main {
                     team1.add(new Sniper(getName(), i, 9));
                     break;
                 case 4:
-                    team1.add(new Crossbowman(getName(), i, 9, 5));
+                    team1.add(new Crossbowman(getName(), i, 9));
                     break;
                 case 5:
                     team1.add(new Monk(getName(), i, 9));
@@ -110,7 +109,7 @@ public class Main {
                     team2.add(new Sniper(getName(), i, 0));
                     break;
                 case 4:
-                    team2.add(new Crossbowman(getName(), i, 0, 5));
+                    team2.add(new Crossbowman(getName(), i, 0));
                     break;
                 case 5:
                     team2.add(new Monk(getName(), i, 0));
@@ -121,12 +120,23 @@ public class Main {
             }
         }
 
-        for (AbstractUnit unit : team1){
+        /*for (AbstractUnit unit : team1){
             System.out.println(unit);
         }
         for (AbstractUnit unit : team2){
             System.out.println(unit);
-        }
+        }*/
+
+        all.addAll(team1);
+        all.addAll(team2);
+        all.sort(new Comparator<AbstractUnit>() {
+            @Override
+            public int compare(AbstractUnit o1, AbstractUnit o2) {
+                return o2.getSpeed() - o1.getSpeed();
+            }
+        });
+
+        all.forEach(n -> n.print());
 
     }
     private static String getName(){
