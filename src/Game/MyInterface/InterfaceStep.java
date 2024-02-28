@@ -5,5 +5,5 @@ import Game.AbstractUnit.AbstractUnit;
 import java.util.List;
 
 public interface InterfaceStep {
-    void step(List<AbstractUnit> teamNum);
+    void step(List<AbstractUnit> teamEnemy, List<AbstractUnit> teamFriend);
 }

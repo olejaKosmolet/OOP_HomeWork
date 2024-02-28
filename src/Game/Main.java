@@ -48,74 +48,44 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        /*Peasant peasant1 = new Peasant(getName(), 0, 1);
-        System.out.println(peasant1.toString());
-        Rogue rogue1 = new Rogue(getName(), 0, 2);
-        System.out.println(rogue1.toString());
-        Sniper sniper1 = new Sniper(getName(), 0, 3);
-        System.out.println(sniper1.toString());
-        Witch witch1 = new Witch(getName(), 0,4);
-        System.out.println(witch1.toString());
-        Spearman spearman1 = new Spearman(getName(), 0, 5);
-        System.out.println(spearman1.toString());
-        Crossbowman crossbowman1 = new Crossbowman(getName(), 0, 6);
-        System.out.println(crossbowman1.toString());
-        Monk monk1 = new Monk(getName(), 0, 7);
-        System.out.println(monk1.toString());*/
 
         int quantity = 10;
         Random rand = new Random();
-        List<AbstractUnit> team1 = new ArrayList<>();
-        List<AbstractUnit> team2 = new ArrayList<>();
-        List<AbstractUnit> all = new ArrayList<>();
+        ArrayList<AbstractUnit> team1 = new ArrayList<>();
+        ArrayList<AbstractUnit> team2 = new ArrayList<>();
+        ArrayList<AbstractUnit> all = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < quantity; i++) {
             int value = rand.nextInt(7);
             switch (value){
                 case 0:
-                    team1.add(new Peasant(getName(), i, 9));
+                    team1.add(new Peasant(getName(), i, 0));
+                    team2.add(new Peasant(getName(), i, 9));
                     break;
                 case 1:
-                    team1.add(new Rogue(getName(), i, 9));
+                    team1.add(new Rogue(getName(), i, 0));
+                    team2.add(new Rogue(getName(), i, 9));
                     break;
                 case 2:
-                    team1.add(new Spearman(getName(), i, 9));
+                    team1.add(new Spearman(getName(), i, 0));
+                    team2.add(new Spearman(getName(), i, 9));
                     break;
                 case 3:
-                    team1.add(new Sniper(getName(), i, 9));
+                    team1.add(new Sniper(getName(), i, 0, 10));
+                    team2.add(new Sniper(getName(), i, 9, 10));
                     break;
                 case 4:
-                    team1.add(new Crossbowman(getName(), i, 9));
+                    team1.add(new Crossbowman(getName(), i, 0, 2, 10));
+                    team2.add(new Crossbowman(getName(), i, 9, 2, 10));
                     break;
                 case 5:
-                    team1.add(new Monk(getName(), i, 9));
+                    team1.add(new Monk(getName(), i, 0));
+                    team2.add(new Monk(getName(), i, 9));
                     break;
                 case 6:
                     team1.add(new Witch(getName(), i, 9));
-                    break;
-            }
-            switch (value){
-                case 0:
-                    team2.add(new Peasant(getName(), i, 0));
-                    break;
-                case 1:
-                    team2.add(new Rogue(getName(), i, 0));
-                    break;
-                case 2:
-                    team2.add(new Spearman(getName(), i, 0));
-                    break;
-                case 3:
-                    team2.add(new Sniper(getName(), i, 0));
-                    break;
-                case 4:
-                    team2.add(new Crossbowman(getName(), i, 0));
-                    break;
-                case 5:
-                    team2.add(new Monk(getName(), i, 0));
-                    break;
-                case 6:
-                    team2.add(new Witch(getName(), i, 0));
+                    team2.add(new Witch(getName(), i, 9));
                     break;
             }
         }
@@ -124,9 +94,27 @@ public class Main {
         all.addAll(team2);
         all.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
 
-        all.forEach(n -> n.print());
+        System.out.println("Team 1");
+        team1.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
+        team1.forEach(n -> n.printInfo());
+        System.out.println("\n");
 
+        System.out.println("Team 2");
+        team2.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
+        team2.forEach(n -> n.printInfo());
+        System.out.println("\n");
+
+        Scanner scan = new Scanner(System.in);
+        while (true){
+            scan.nextLine();
+            for (AbstractUnit unit : all) {
+                if(team1.contains(unit)) unit.step(team1, team2);
+                        else unit.step(team1, team2);
+            }
+            all.forEach(n -> n.printInfo());
+        }
     }
+
     private static String getName(){
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length-1)]);
     }

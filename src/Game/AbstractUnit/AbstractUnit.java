@@ -17,11 +17,9 @@ public abstract class AbstractUnit implements InterfaceStep{
     protected int speed;
     String className;
 
-
-
-    public AbstractUnit(int x, int y, String name, int armor, String weapon, int hp, int speed, int damage){
+    public AbstractUnit(Place position, String name, int armor, String weapon, int hp, int speed, int damage){
+        this.position = position;
         this.className = this.getClass().getSimpleName();
-        position = new Place(x, y);
         this.name = name;
         this.armor = armor;
         this.weapon = weapon;
@@ -30,24 +28,31 @@ public abstract class AbstractUnit implements InterfaceStep{
         this.damage = damage;
     }
 
-    public void print() {
+    public void printInfo() {
         System.out.printf("\nCLASS: %s; NAME: %s; HP: %d; WEAPON: %s; DAMAGE: %d; SPEED: %d; ARMOR: %d; POSITION: "
-                + position + "\n", className, name, hp, weapon, damage, speed, armor);
+                + position, className, name, hp, weapon, damage, speed, armor);
     }
 
-    public void getHit(float damage){
-        hp -= damage;
-        if (hp < 0) hp = 0;
+    public void getHit(int damage){
+        this.hp -= damage;
+        if (hp < 0) {
+            hp = 0;
+/*
+            death();
+*/
+        }
         if (hp > 0) hp = maxHP;
+        /*System.out.println(name + " Take dmg");*/
     }
 
     public double shield(double hp){
         return hp;
     }
 
-    public double getDmg(double hpMate, int damageEnemy){
-        return hp - damageEnemy;
-    }
+    /*public void death(){
+        if (this.hp <= 0) {
+        }
+    }*/
 
     public AbstractUnit searchForEnemy(List<AbstractUnit> teamNum){
         if (teamNum.isEmpty()){
@@ -68,6 +73,6 @@ public abstract class AbstractUnit implements InterfaceStep{
     }
 
     public int getSpeed() {
-        return speed;
+        return this.speed;
     }
 }

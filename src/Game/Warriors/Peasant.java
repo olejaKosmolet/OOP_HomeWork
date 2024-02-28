@@ -1,6 +1,7 @@
 package Game.Warriors;
 
 import Game.AbstractUnit.AbstractUnit;
+import Game.Place.Place;
 
 import java.util.List;
 
@@ -10,11 +11,11 @@ public class Peasant extends AbstractUnit {
     int resistance;
 
     public Peasant(String name, int x, int y) {
-        super(x, y, name, 3, "sickle" , 10, 0, 10);
+        super(new Place(x, y), name, 3, "sickle" , 10, 0, 10);
     }
 
     @Override
-    public void getHit(float damage) {
+    public void getHit(int damage) {
         super.getHit(damage);
     }
 
@@ -23,12 +24,9 @@ public class Peasant extends AbstractUnit {
         return super.shield(hp);
     }
 
-    @Override
-    public double getDmg(double hpMate, int damageEnemy) {
-        return super.getDmg(hpMate, damageEnemy);
-    }
 
     @Override
-    public void step(List<AbstractUnit> teamNum){
+    public void step(List<AbstractUnit> teamEnemy, List<AbstractUnit> teamFriend){
+
     }
 }

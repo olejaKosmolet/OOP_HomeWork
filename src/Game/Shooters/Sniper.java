@@ -1,6 +1,7 @@
 package Game.Shooters;
 
 import Game.AbstractUnit.AbstractUnit;
+import Game.Place.Place;
 
 import java.util.List;
 
@@ -9,12 +10,13 @@ public class Sniper extends AbstractUnit {
     int numberOfShells;
     int rangeAttack;
 
-    public Sniper(String name, int x, int y) {
-        super(x, y, name, 2, "rifle" , 8, 3, 10);
+    public Sniper(String name, int x, int y, int numberOfShells) {
+        super(new Place(x, y), name, 2, "rifle" , 100, 3, 10);
+        this.numberOfShells = numberOfShells;
     }
 
     @Override
-    public void getHit(float damage) {
+    public void getHit(int damage) {
         super.getHit(damage);
     }
 
@@ -24,17 +26,13 @@ public class Sniper extends AbstractUnit {
     }
 
     @Override
-    public double getDmg(double hpMate, int damageEnemy) {
-        return super.getDmg(hpMate, damageEnemy);
-    }
-
-    @Override
-    public void step(List<AbstractUnit> teamNum) {
+    public void step(List<AbstractUnit> teamEnemy, List<AbstractUnit> teamFriend) {
         if ((hp <= 0) || (numberOfShells == 0)){
-            System.out.println("Арбалетчик " + name + " пал!");
+            System.out.println("Снайпер " + name + " пал!");
             return;
         }
-        AbstractUnit enemy = searchForEnemy(teamNum);
+        AbstractUnit enemy = searchForEnemy(teamEnemy);
         enemy.getHit(this.damage);
+        numberOfShells --;
     }
 }

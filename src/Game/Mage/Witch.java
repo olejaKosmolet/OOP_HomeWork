@@ -1,6 +1,7 @@
 package Game.Mage;
 
 import Game.AbstractUnit.AbstractUnit;
+import Game.Place.Place;
 
 import java.util.List;
 
@@ -10,11 +11,11 @@ public class Witch extends AbstractUnit {
     int numberOfWordsOfPower;
 
     public Witch(String name, int x, int y) {
-        super(x, y, name, 2, "magic wand", 7, 1, 10);
+        super(new Place(x,y), name, 2, "magic wand", 7, 1, 10);
     }
 
     @Override
-    public void getHit(float damage) {
+    public void getHit(int damage) {
         super.getHit(damage);
     }
 
@@ -23,14 +24,11 @@ public class Witch extends AbstractUnit {
         return super.shield(hp);
     }
 
-    @Override
-    public double getDmg(double hpMate, int damageEnemy) {
-        return super.getDmg(hpMate, damageEnemy);
-    }
+
 
 
     @Override
-    public void step(List<AbstractUnit> teamNum) {
+    public void step(List<AbstractUnit> teamEnemy, List<AbstractUnit> teamFriend) {
 
     }
 }
