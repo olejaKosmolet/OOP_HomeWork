@@ -1,17 +1,14 @@
 package Game.Mage;
 
 import Game.AbstractUnit.AbstractUnit;
-import Game.Place.Place;
+import Game.Place.Position;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Witch extends AbstractUnit {
-    int mana;
-    int rangeAttack;
-    int numberOfWordsOfPower;
 
     public Witch(String name, int x, int y) {
-        super(new Place(x,y), name, 2, "magic wand", 7, 1, 10);
+        super(new Position(x,y), name, 2, "magic wand", 50, 1, 5);
     }
 
     @Override
@@ -20,15 +17,16 @@ public class Witch extends AbstractUnit {
     }
 
     @Override
-    public double shield(double hp) {
-        return super.shield(hp);
+    public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
+        if (getHp() <= 0){
+            System.out.println("Ведьмак " + name + " пал!");
+            return;
+        }
+        AbstractUnit enemy = searchForEnemy(teamEnemy);
+        enemy.getHit(this.damage);
     }
-
-
-
-
     @Override
-    public void step(List<AbstractUnit> teamEnemy, List<AbstractUnit> teamFriend) {
-
+    public String getInfo() {
+        return "Ведьмак";
     }
 }

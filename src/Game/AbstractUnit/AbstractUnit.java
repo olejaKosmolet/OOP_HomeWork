@@ -1,13 +1,12 @@
 package Game.AbstractUnit;
 
 import Game.MyInterface.InterfaceStep;
-import Game.Place.Place;
+import Game.Place.Position;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public abstract class AbstractUnit implements InterfaceStep{
 
-    public Place position;
     protected String name;
     protected int damage;
     protected int armor;
@@ -15,9 +14,10 @@ public abstract class AbstractUnit implements InterfaceStep{
     protected int hp;
     protected  int maxHP;
     protected int speed;
-    String className;
+    public String className;
+    public Position position;
 
-    public AbstractUnit(Place position, String name, int armor, String weapon, int hp, int speed, int damage){
+    public AbstractUnit(Position position, String name, int armor, String weapon, int hp, int speed, int damage){
         this.position = position;
         this.className = this.getClass().getSimpleName();
         this.name = name;
@@ -28,44 +28,30 @@ public abstract class AbstractUnit implements InterfaceStep{
         this.damage = damage;
     }
 
-    public void printInfo() {
-        System.out.printf("\nCLASS: %s; NAME: %s; HP: %d; WEAPON: %s; DAMAGE: %d; SPEED: %d; ARMOR: %d; POSITION: "
-                + position, className, name, hp, weapon, damage, speed, armor);
+    @Override
+    public String toString() {
+       return "NAME = " + name + " | \u2665 " + hp + " | ⚔ " + damage + " | \uD83D\uDEE1\uFE0F" + armor;
     }
 
     public void getHit(int damage){
-        this.hp -= damage;
+        hp -= damage;
         if (hp < 0) {
             hp = 0;
-/*
-            death();
-*/
         }
-        if (hp > 0) hp = maxHP;
-        /*System.out.println(name + " Take dmg");*/
+        if (hp >= maxHP) hp = maxHP;
     }
 
-    public double shield(double hp){
-        return hp;
-    }
-
-    /*public void death(){
-        if (this.hp <= 0) {
-        }
-    }*/
-
-    public AbstractUnit searchForEnemy(List<AbstractUnit> teamNum){
-        if (teamNum.isEmpty()){
+    public AbstractUnit searchForEnemy(ArrayList<AbstractUnit> enemyTeam){
+        if (enemyTeam.isEmpty()){
             return null;
         }
 
         AbstractUnit nearestEnemy = null;
         double minDistance = Double.MAX_VALUE;
 
-        for (AbstractUnit enemy : teamNum){
-            float distance = position.distanceToTarget(enemy.position);
-            if (enemy.hp > 0 && distance < minDistance){
-                minDistance = distance;
+        for (AbstractUnit enemy : enemyTeam){
+            if (position.distanceToTarget(enemy.position) < minDistance && getHp() > 0) {
+                minDistance = position.distanceToTarget(enemy.position);
                 nearestEnemy = enemy;
             }
         }
@@ -74,5 +60,13 @@ public abstract class AbstractUnit implements InterfaceStep{
 
     public int getSpeed() {
         return this.speed;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
+    public String getInfo(){
+        return " ";
     }
 }

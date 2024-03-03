@@ -1,9 +1,9 @@
 package Game.Shooters;
 
 import Game.AbstractUnit.AbstractUnit;
-import Game.Place.Place;
+import Game.Place.Position;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Sniper extends AbstractUnit {
     int dexterity;
@@ -11,8 +11,13 @@ public class Sniper extends AbstractUnit {
     int rangeAttack;
 
     public Sniper(String name, int x, int y, int numberOfShells) {
-        super(new Place(x, y), name, 2, "rifle" , 100, 3, 10);
+        super(new Position(x, y), name, 2, "rifle" , 50, 3, 2);
         this.numberOfShells = numberOfShells;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", \u27b6 " + numberOfShells;
     }
 
     @Override
@@ -20,14 +25,11 @@ public class Sniper extends AbstractUnit {
         super.getHit(damage);
     }
 
-    @Override
-    public double shield(double hp) {
-        return super.shield(hp);
-    }
+
 
     @Override
-    public void step(List<AbstractUnit> teamEnemy, List<AbstractUnit> teamFriend) {
-        if ((hp <= 0) || (numberOfShells == 0)){
+    public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
+        if (getHp() <= 0 || numberOfShells == 0){
             System.out.println("Снайпер " + name + " пал!");
             return;
         }
@@ -35,4 +37,10 @@ public class Sniper extends AbstractUnit {
         enemy.getHit(this.damage);
         numberOfShells --;
     }
+
+    @Override
+    public String getInfo() {
+        return "Снайпер";
+    }
+
 }

@@ -1,17 +1,14 @@
 package Game.Mage;
 
 import Game.AbstractUnit.AbstractUnit;
-import Game.Place.Place;
+import Game.Place.Position;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Monk extends AbstractUnit {
-    int mana;
-    int rangeHeal;
-    int numberOfWordsOfPower;
 
     public Monk(String name, int x, int y) {
-        super(new Place(x,y), name, 3, "staff", 5, 1, -10);
+        super(new Position(x,y), name, 3, "staff", 50, 1, -15);
     }
 
     @Override
@@ -20,33 +17,34 @@ public class Monk extends AbstractUnit {
     }
 
     @Override
-    public double shield(double hp) {
-        return super.shield(hp);
-    }
+    public void step(ArrayList<AbstractUnit> enemy, ArrayList<AbstractUnit> friend) {
+        if (getHp()<=0) return;
 
-
-    @Override
-    public void step(List<AbstractUnit> teamEnemy, List<AbstractUnit> teamFriend) {
-        if(this.hp <= 0) return;
-        AbstractUnit target = super.searchForEnemy(teamFriend);
-        if (position.distanceToTarget(target.position) < 2) {
+        AbstractUnit target = super.searchForEnemy(friend);
+        if (position.distanceToTarget(target.position) < 2){
             target.getHit(this.damage);
             return;
         }
+        Position diff = position.getDifference(target.position);
 
-        Place diff = position.difference(target.position);
-        Place newPlace = new Place(position.x, position.y);
+        Position newposition = new Position(position.x, position.y);
 
-        if (Math.abs(diff.x) > Math.abs(diff.y)){
-            newPlace.x += (diff.x < 0) ? 1 : -1;
+        if (Math.abs(diff.x) > Math.abs(diff.y)) {
+            newposition.x += diff.x < 0 ? 1 : -1;
         }
-        else {
-            newPlace.y += (diff.y < 0) ? 1 : -1;
-        }
+        else
 
-        for (AbstractUnit unit : teamFriend){
-            if (unit.position.equals(newPlace)) return;
+            newposition.y += diff.y < 0 ? 1 : -1;
+
+        for (AbstractUnit unit : friend) {
+            if (unit.position.equals(newposition) && unit.getHp() > 0) return;
+
         }
-        this.position = newPlace;
+        this.position = newposition;
+    }
+
+    @Override
+    public String getInfo() {
+        return "Монах";
     }
 }

@@ -44,78 +44,93 @@ import Game.Warriors.Peasant;
 import Game.Warriors.Rogue;
 import Game.Warriors.Spearman;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
+    public static ArrayList<AbstractUnit> holyTeam = new ArrayList<>();
+    public static ArrayList<AbstractUnit> darkTeam = new ArrayList<>();
+    public static ArrayList<AbstractUnit> allTeam = new ArrayList<>();
     public static void main(String[] args) {
-
-        int quantity = 10;
-        Random rand = new Random();
-        ArrayList<AbstractUnit> team1 = new ArrayList<>();
-        ArrayList<AbstractUnit> team2 = new ArrayList<>();
-        ArrayList<AbstractUnit> all = new ArrayList<>();
+        getUnits();
 
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < quantity; i++) {
-            int value = rand.nextInt(7);
-            switch (value){
-                case 0:
-                    team1.add(new Peasant(getName(), i, 0));
-                    team2.add(new Peasant(getName(), i, 9));
-                    break;
-                case 1:
-                    team1.add(new Rogue(getName(), i, 0));
-                    team2.add(new Rogue(getName(), i, 9));
-                    break;
-                case 2:
-                    team1.add(new Spearman(getName(), i, 0));
-                    team2.add(new Spearman(getName(), i, 9));
-                    break;
-                case 3:
-                    team1.add(new Sniper(getName(), i, 0, 10));
-                    team2.add(new Sniper(getName(), i, 9, 10));
-                    break;
-                case 4:
-                    team1.add(new Crossbowman(getName(), i, 0, 2, 10));
-                    team2.add(new Crossbowman(getName(), i, 9, 2, 10));
-                    break;
-                case 5:
-                    team1.add(new Monk(getName(), i, 0));
-                    team2.add(new Monk(getName(), i, 9));
-                    break;
-                case 6:
-                    team1.add(new Witch(getName(), i, 9));
-                    team2.add(new Witch(getName(), i, 9));
-                    break;
-            }
-        }
 
-        all.addAll(team1);
-        all.addAll(team2);
-        all.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
-
-        System.out.println("Team 1");
-        team1.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
-        team1.forEach(n -> n.printInfo());
-        System.out.println("\n");
-
-        System.out.println("Team 2");
-        team2.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
-        team2.forEach(n -> n.printInfo());
-        System.out.println("\n");
+        allTeam.addAll(darkTeam);
+        allTeam.addAll(holyTeam);
+        allTeam.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
+        System.out.println();
 
         Scanner scan = new Scanner(System.in);
         while (true){
+            View.view();
             scan.nextLine();
-            for (AbstractUnit unit : all) {
-                if(team1.contains(unit)) unit.step(team1, team2);
-                        else unit.step(team1, team2);
+            for (AbstractUnit unit : allTeam) {
+                if(holyTeam.contains(unit)) unit.step(holyTeam, darkTeam);
+                        else unit.step(holyTeam, darkTeam);
             }
-            all.forEach(n -> n.printInfo());
         }
     }
 
     private static String getName(){
         return String.valueOf(Names.values()[new Random().nextInt(Names.values().length-1)]);
+    }
+
+    private static void getUnits(){
+        int quantity = 10;
+        Random rand = new Random();
+        for (int i = 1; i < quantity + 1; i++) {
+            int value = rand.nextInt(7);
+            switch (value){
+                case 0:
+                    holyTeam.add(new Peasant(getName(), i, 1));
+                    break;
+                case 1:
+                    holyTeam.add(new Rogue(getName(), i, 1));
+                    break;
+                case 2:
+                    holyTeam.add(new Spearman(getName(), i, 1));
+                    break;
+                case 3:
+                    holyTeam.add(new Sniper(getName(), i, 1, 10));
+                    break;
+                case 4:
+                    holyTeam.add(new Crossbowman(getName(), i, 1, 10));
+                    break;
+                case 5:
+                    holyTeam.add(new Monk(getName(), i, 1));
+                    break;
+                case 6:
+                    holyTeam.add(new Witch(getName(), i, 1));
+                    break;
+            }
+        }
+        for (int i = 1; i < quantity + 1; i++) {
+            int value = rand.nextInt(7);
+            switch (value){
+                case 0:
+                    darkTeam.add(new Peasant(getName(), i, 10));
+                    break;
+                case 1:
+                    darkTeam.add(new Rogue(getName(), i, 10));
+                    break;
+                case 2:
+                    darkTeam.add(new Spearman(getName(), i, 10));
+                    break;
+                case 3:
+                    darkTeam.add(new Sniper(getName(), i, 10, 10));
+                    break;
+                case 4:
+                    darkTeam.add(new Crossbowman(getName(), i, 10, 10));
+                    break;
+                case 5:
+                    darkTeam.add(new Monk(getName(), i, 10));
+                    break;
+                case 6:
+                    darkTeam.add(new Witch(getName(), i, 10));
+                    break;
+            }
+        }
     }
 }

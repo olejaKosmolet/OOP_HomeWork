@@ -2,8 +2,8 @@ package Game.MyInterface;
 
 import Game.AbstractUnit.AbstractUnit;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface InterfaceStep {
-    void step(List<AbstractUnit> teamEnemy, List<AbstractUnit> teamFriend);
+    void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend);
 }
