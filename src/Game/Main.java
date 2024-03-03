@@ -61,14 +61,37 @@ public class Main {
         allTeam.addAll(holyTeam);
         allTeam.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
         System.out.println();
+        boolean flag = true;
 
         Scanner scan = new Scanner(System.in);
         while (true){
             View.view();
             scan.nextLine();
+            int summHp1 = 0;
+            int summHp2 = 0;
+            for (AbstractUnit unit : holyTeam){
+                summHp1 += unit.getHp();
+            }
+            for (AbstractUnit unit : darkTeam) {
+                summHp2 += unit.getHp();
+            }
+            if (summHp1 < 1){
+                System.out.println("Победили силы тьмы");
+                break;
+            }
+
+            else if (summHp2 < 1){
+                System.out.println("Победили силы света");
+                break;
+            }
+
+
             for (AbstractUnit unit : allTeam) {
-                if(holyTeam.contains(unit)) unit.step(holyTeam, darkTeam);
-                        else unit.step(holyTeam, darkTeam);
+                if(holyTeam.contains(unit)) unit.step(darkTeam, holyTeam);
+                        else unit.step(holyTeam , darkTeam);
+            }
+            if (holyTeam.size() == 0){
+
             }
         }
     }

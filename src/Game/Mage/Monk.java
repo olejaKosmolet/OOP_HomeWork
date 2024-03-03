@@ -18,7 +18,7 @@ public class Monk extends AbstractUnit {
 
     @Override
     public void step(ArrayList<AbstractUnit> enemy, ArrayList<AbstractUnit> friend) {
-        if (getHp()<=0) return;
+        if (hp<=0) return;
 
         AbstractUnit target = super.searchForEnemy(friend);
         if (position.distanceToTarget(target.position) < 2){

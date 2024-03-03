@@ -18,7 +18,7 @@ public class Witch extends AbstractUnit {
 
     @Override
     public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
-        if (getHp() <= 0){
+        if (hp <= 0){
             System.out.println("Ведьмак " + name + " пал!");
             return;
         }

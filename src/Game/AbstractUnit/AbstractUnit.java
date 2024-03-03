@@ -35,9 +35,7 @@ public abstract class AbstractUnit implements InterfaceStep{
 
     public void getHit(int damage){
         hp -= damage;
-        if (hp < 0) {
-            hp = 0;
-        }
+        if (hp < 0)  hp = 0;
         if (hp >= maxHP) hp = maxHP;
     }
 
@@ -50,7 +48,7 @@ public abstract class AbstractUnit implements InterfaceStep{
         double minDistance = Double.MAX_VALUE;
 
         for (AbstractUnit enemy : enemyTeam){
-            if (position.distanceToTarget(enemy.position) < minDistance && getHp() > 0) {
+            if (position.distanceToTarget(enemy.position) < minDistance && enemy.getHp() > 0) {
                 minDistance = position.distanceToTarget(enemy.position);
                 nearestEnemy = enemy;
             }

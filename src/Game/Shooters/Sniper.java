@@ -29,7 +29,7 @@ public class Sniper extends AbstractUnit {
 
     @Override
     public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
-        if (getHp() <= 0 || numberOfShells == 0){
+        if (hp <= 0 || numberOfShells == 0){
             System.out.println("Снайпер " + name + " пал!");
             return;
         }
