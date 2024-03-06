@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Rogue extends AbstractUnit {
 
     public Rogue(String name, int x, int y) {
-        super(new Position(x, y), name, 6, "knife blade", 100, 2, 3);
+        super(new Position(x, y), name, 6, "knife blade", 100, 2, 3, false);
     }
 
     @Override

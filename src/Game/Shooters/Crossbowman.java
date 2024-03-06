@@ -2,18 +2,23 @@ package Game.Shooters;
 
 import Game.AbstractUnit.AbstractUnit;
 import Game.Place.Position;
+import Game.Warriors.Peasant;
 
 import java.util.ArrayList;
 
 public class Crossbowman extends AbstractUnit {
     int numberOfShells;
-    int rangeAttack;
 
     public Crossbowman(String name, int x, int y, int numberOfShells) {
-        super(new Position(x,y), name, 3, "crossbow", 50, 3, 3);
-        this.rangeAttack = rangeAttack;
+        super(new Position(x,y), name, 3, "crossbow", 50, 3, 3, false);
+
         this.numberOfShells = numberOfShells;
 
+    }
+    @Override
+    public void getSheells() {
+        this.numberOfShells++;
+        System.out.println(name + " получаю боеприпассы");
     }
 
     @Override
@@ -29,10 +34,22 @@ public class Crossbowman extends AbstractUnit {
     // возможно из-за метода расчёта урона не заработает !!!
     @Override
     public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
-        if (getHp() <= 0 || numberOfShells == 0){
+        if (getHp() <= 0){
             System.out.println("Арбалетчик " + name + " пал!");
             return;
         }
+        if (numberOfShells <= 0) {
+            for (AbstractUnit unit : teamFriend) {
+                if (unit.getInfo().equals("Крестьянин") && ((Peasant) unit).opportunityToGiveShells == true) {
+                    numberOfShells++;
+                    System.out.println("Арбалетчик " + name + " получил болт");
+                } else  {
+                    System.out.println(name + " у меня нет боеприпасов!!!");
+                    return;
+                }
+            }
+        }
+
         AbstractUnit enemy = searchForEnemy(teamEnemy);
         enemy.getHit(this.damage);
         numberOfShells --;

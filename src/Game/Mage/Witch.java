@@ -7,8 +7,12 @@ import java.util.ArrayList;
 
 public class Witch extends AbstractUnit {
 
+    int mana;
+
+
     public Witch(String name, int x, int y) {
-        super(new Position(x,y), name, 2, "magic wand", 50, 1, 5);
+        super(new Position(x,y), name, 2, "magic wand", 50, 1, 5, false);
+        this.mana = mana;
     }
 
     @Override

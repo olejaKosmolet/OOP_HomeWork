@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public abstract class AbstractUnit implements InterfaceStep{
 
+    protected  boolean callNeedHp;
     protected String name;
     protected int damage;
     protected int armor;
@@ -17,7 +18,7 @@ public abstract class AbstractUnit implements InterfaceStep{
     public String className;
     public Position position;
 
-    public AbstractUnit(Position position, String name, int armor, String weapon, int hp, int speed, int damage){
+    public AbstractUnit(Position position, String name, int armor, String weapon, int hp, int speed, int damage, boolean call){
         this.position = position;
         this.className = this.getClass().getSimpleName();
         this.name = name;
@@ -30,7 +31,7 @@ public abstract class AbstractUnit implements InterfaceStep{
 
     @Override
     public String toString() {
-       return "NAME = " + name + " | \u2665 " + hp + " | ⚔ " + damage + " | \uD83D\uDEE1\uFE0F" + armor;
+       return getInfo()+ " _ " + name + " | \u2665 " + hp + " | ⚔ " + damage + " | \uD83D\uDEE1\uFE0F" + armor;
     }
 
     public void getHit(int damage){
@@ -61,10 +62,21 @@ public abstract class AbstractUnit implements InterfaceStep{
     }
 
     public int getHp(){
-        return hp;
+        return this.hp;
     }
 
     public String getInfo(){
         return " ";
     }
+    public boolean needSheells(){
+        return false;
+    }
+
+    public void getSheells(){
+    }
+
+    public boolean needHp() {
+        return callNeedHp;
+    }
+
 }

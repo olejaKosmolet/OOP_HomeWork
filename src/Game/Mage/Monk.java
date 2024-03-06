@@ -6,9 +6,11 @@ import Game.Place.Position;
 import java.util.ArrayList;
 
 public class Monk extends AbstractUnit {
+    int mana;
 
     public Monk(String name, int x, int y) {
-        super(new Position(x,y), name, 3, "staff", 50, 1, -15);
+        super(new Position(x,y), name, 3, "staff", 50, 1, -15, false);
+        this.mana = mana;
     }
 
     @Override
