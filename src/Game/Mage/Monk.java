@@ -9,7 +9,7 @@ public class Monk extends AbstractUnit {
     int mana;
 
     public Monk(String name, int x, int y) {
-        super(new Position(x,y), name, 3, "staff", 50, 1, -15, false);
+        super(new Position(x,y), name, 3, "staff", 50, 1, 0, false);
         this.mana = mana;
     }
 
@@ -19,34 +19,34 @@ public class Monk extends AbstractUnit {
     }
 
     @Override
+    public void getHeal() {
+        hp += maxHP;
+        System.out.println(name + " меня полечили");
+    }
+
+    @Override
     public void step(ArrayList<AbstractUnit> enemy, ArrayList<AbstractUnit> friend) {
         if (hp<=0) return;
 
-        AbstractUnit target = super.searchForEnemy(friend);
-        if (position.distanceToTarget(target.position) < 2){
-            target.getHit(this.damage);
-            return;
+        for (AbstractUnit unit : friend){
+            if (unit.needHp() && mana > 1){
+                mana -= 2;
+                unit.getHeal();
+            }
         }
-        Position diff = position.getDifference(target.position);
-
-        Position newposition = new Position(position.x, position.y);
-
-        if (Math.abs(diff.x) > Math.abs(diff.y)) {
-            newposition.x += diff.x < 0 ? 1 : -1;
-        }
-        else
-
-            newposition.y += diff.y < 0 ? 1 : -1;
-
-        for (AbstractUnit unit : friend) {
-            if (unit.position.equals(newposition) && unit.getHp() > 0) return;
-
-        }
-        this.position = newposition;
+        mana ++;
     }
 
     @Override
     public String getInfo() {
         return "Монах";
+    }
+
+    @Override
+    public boolean needHp() {
+        if (this.hp < this.maxHP){
+            super.callNeedHp = true;
+        }
+        return callNeedHp;
     }
 }

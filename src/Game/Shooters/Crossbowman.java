@@ -27,6 +27,12 @@ public class Crossbowman extends AbstractUnit {
     }
 
     @Override
+    public void getHeal() {
+        hp += maxHP;
+        System.out.println(name + " меня полечили");
+    }
+
+    @Override
     public void getHit(int damage) {
         super.getHit(damage);
     }
@@ -34,7 +40,7 @@ public class Crossbowman extends AbstractUnit {
     // возможно из-за метода расчёта урона не заработает !!!
     @Override
     public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
-        if (getHp() <= 0){
+        if (hp <= 0){
             System.out.println("Арбалетчик " + name + " пал!");
             return;
         }
@@ -58,5 +64,13 @@ public class Crossbowman extends AbstractUnit {
     @Override
     public String getInfo() {
         return "Арбалетчик";
+    }
+
+    @Override
+    public boolean needHp() {
+        if (this.hp < this.maxHP){
+            super.callNeedHp = true;
+        }
+        return callNeedHp;
     }
 }

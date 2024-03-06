@@ -17,6 +17,12 @@ public class Rogue extends AbstractUnit {
     }
 
     @Override
+    public void getHeal() {
+        hp += maxHP;
+        System.out.println(name + " меня полечили");
+    }
+
+    @Override
     public void step(ArrayList<AbstractUnit> enemy, ArrayList<AbstractUnit> friend) {
         if (hp<=0) return;
 
@@ -46,5 +52,14 @@ public class Rogue extends AbstractUnit {
     @Override
     public String getInfo() {
         return "Разбойник";
+    }
+
+
+    @Override
+    public boolean needHp() {
+        if (this.hp < this.maxHP){
+            super.callNeedHp = true;
+        }
+        return callNeedHp;
     }
 }

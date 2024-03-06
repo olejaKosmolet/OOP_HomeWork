@@ -35,6 +35,12 @@ public class Sniper extends AbstractUnit {
     }
 
     @Override
+    public void getHeal() {
+        hp += maxHP;
+        System.out.println(name + " меня полечили");
+    }
+
+    @Override
     public void getSheells() {
         this.numberOfShells++;
         System.out.println(name + " получаю боеприпассы");
@@ -63,7 +69,7 @@ public class Sniper extends AbstractUnit {
 
     @Override
     public boolean needHp() {
-        if (hp < maxHP){
+        if (this.hp < this.maxHP){
             super.callNeedHp = true;
         }
         return callNeedHp;

@@ -65,6 +65,10 @@ public abstract class AbstractUnit implements InterfaceStep{
         return this.hp;
     }
 
+    public void getHeal(){
+
+    }
+
     public String getInfo(){
         return " ";
     }
@@ -76,7 +80,7 @@ public abstract class AbstractUnit implements InterfaceStep{
     }
 
     public boolean needHp() {
-        return callNeedHp;
+        return false;
     }
 
 }

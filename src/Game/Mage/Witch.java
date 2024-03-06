@@ -10,8 +10,8 @@ public class Witch extends AbstractUnit {
     int mana;
 
 
-    public Witch(String name, int x, int y) {
-        super(new Position(x,y), name, 2, "magic wand", 50, 1, 5, false);
+    public Witch(String name, int x, int y,int mana) {
+        super(new Position(x,y), name, 2, "magic wand", 50, 1, 0, false);
         this.mana = mana;
     }
 
@@ -21,13 +21,22 @@ public class Witch extends AbstractUnit {
     }
 
     @Override
-    public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
-        if (hp <= 0){
-            System.out.println("Ведьмак " + name + " пал!");
-            return;
+    public void getHeal() {
+        hp += maxHP;
+        System.out.println(name + " меня полечили");
+    }
+
+    @Override
+    public void step(ArrayList<AbstractUnit> enemy, ArrayList<AbstractUnit> friend) {
+        if (hp<=0) return;
+
+        for (AbstractUnit unit : friend){
+            if (unit.needHp() && mana > 1){
+                mana -= 2;
+                unit.getHeal();
+            }
         }
-        AbstractUnit enemy = searchForEnemy(teamEnemy);
-        enemy.getHit(this.damage);
+        mana ++;
     }
     @Override
     public String getInfo() {
