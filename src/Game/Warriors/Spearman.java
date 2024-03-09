@@ -16,12 +16,6 @@ public class Spearman extends AbstractUnit {
         super.getHit(damage);
     }
 
-    /*@Override
-    public void getHeal() {
-        hp += 1;
-        System.out.println(name + " меня полечили");
-    }*/
-
     @Override
     public void step(ArrayList<AbstractUnit> enemy, ArrayList<AbstractUnit> friend) {
         if (getHp()<=0) return;

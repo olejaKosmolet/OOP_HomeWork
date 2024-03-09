@@ -122,10 +122,10 @@ public class Main {
                     holyTeam.add(new Crossbowman(getName(), i, 1, 15));
                     break;
                 case 5:
-                    holyTeam.add(new Monk(getName(), i, 1, 100));
+                    holyTeam.add(new Monk(getName(), i, 1, 10));
                     break;
                 case 6:
-                    holyTeam.add(new Witch(getName(), i, 1, 100));
+                    holyTeam.add(new Witch(getName(), i, 1, 10));
                     break;
             }
         }
@@ -142,16 +142,16 @@ public class Main {
                     darkTeam.add(new Spearman(getName(), i, 10));
                     break;
                 case 3:
-                    darkTeam.add(new Sniper(getName(), i, 10, 10));
+                    darkTeam.add(new Sniper(getName(), i, 10, 15));
                     break;
                 case 4:
-                    darkTeam.add(new Crossbowman(getName(), i, 10, 10));
+                    darkTeam.add(new Crossbowman(getName(), i, 10, 15));
                     break;
                 case 5:
-                    darkTeam.add(new Monk(getName(), i, 10, 100));
+                    darkTeam.add(new Monk(getName(), i, 10, 10));
                     break;
                 case 6:
-                    darkTeam.add(new Witch(getName(), i, 10, 100));
+                    darkTeam.add(new Witch(getName(), i, 10, 10));
                     break;
             }
         }
