@@ -16,15 +16,10 @@ public class Rogue extends AbstractUnit {
         super.getHit(damage);
     }
 
-    @Override
-    public void getHeal() {
-        hp += maxHP;
-        System.out.println(name + " меня полечили");
-    }
 
     @Override
     public void step(ArrayList<AbstractUnit> enemy, ArrayList<AbstractUnit> friend) {
-        if (hp<=0) return;
+        if (getHp()<=0) return;
 
         AbstractUnit target = super.searchForEnemy(enemy);
         if (position.distanceToTarget(target.position) < 2){
@@ -53,13 +48,9 @@ public class Rogue extends AbstractUnit {
     public String getInfo() {
         return "Разбойник";
     }
-
-
     @Override
-    public boolean needHp() {
-        if (this.hp < this.maxHP){
-            super.callNeedHp = true;
-        }
-        return callNeedHp;
+    public void getResurrection() {
+        super.getResurrection();
+        System.out.println(name + "  Я ожил !");
     }
 }

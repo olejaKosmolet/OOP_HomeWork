@@ -116,16 +116,16 @@ public class Main {
                     holyTeam.add(new Spearman(getName(), i, 1));
                     break;
                 case 3:
-                    holyTeam.add(new Sniper(getName(), i, 1, 10));
+                    holyTeam.add(new Sniper(getName(), i, 1, 15));
                     break;
                 case 4:
-                    holyTeam.add(new Crossbowman(getName(), i, 1, 10));
+                    holyTeam.add(new Crossbowman(getName(), i, 1, 15));
                     break;
                 case 5:
-                    holyTeam.add(new Monk(getName(), i, 1));
+                    holyTeam.add(new Monk(getName(), i, 1, 100));
                     break;
                 case 6:
-                    holyTeam.add(new Witch(getName(), i, 1));
+                    holyTeam.add(new Witch(getName(), i, 1, 100));
                     break;
             }
         }
@@ -148,10 +148,10 @@ public class Main {
                     darkTeam.add(new Crossbowman(getName(), i, 10, 10));
                     break;
                 case 5:
-                    darkTeam.add(new Monk(getName(), i, 10));
+                    darkTeam.add(new Monk(getName(), i, 10, 100));
                     break;
                 case 6:
-                    darkTeam.add(new Witch(getName(), i, 10));
+                    darkTeam.add(new Witch(getName(), i, 10, 100));
                     break;
             }
         }

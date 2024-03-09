@@ -2,16 +2,18 @@ package Game.Shooters;
 
 import Game.AbstractUnit.AbstractUnit;
 import Game.Place.Position;
+import Game.Warriors.Peasant;
 
 import java.util.ArrayList;
 
 public class Sniper extends AbstractUnit {
-    private int numberOfShells;
-    private boolean needSheells;
+    protected int numberOfShells;
+    protected int maxNumberOfShells;
 
     public Sniper(String name, int x, int y, int numberOfShells) {
         super(new Position(x, y), name, 2, "rifle" , 50, 3, 2, false);
         this.numberOfShells = numberOfShells;
+        this.maxNumberOfShells = this.numberOfShells = numberOfShells;
     }
 
     @Override
@@ -22,11 +24,9 @@ public class Sniper extends AbstractUnit {
         else return false;
     }
 
-
-
     @Override
     public String toString() {
-        return super.toString() + ", \u27b6 " + numberOfShells;
+        return super.toString() + " | \u27b6 " + numberOfShells;
     }
 
     @Override
@@ -35,26 +35,27 @@ public class Sniper extends AbstractUnit {
     }
 
     @Override
-    public void getHeal() {
-        hp += maxHP;
-        System.out.println(name + " меня полечили");
-    }
-
-    @Override
     public void getSheells() {
-        this.numberOfShells++;
+        numberOfShells++;
         System.out.println(name + " получаю боеприпассы");
     }
 
     @Override
     public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
-        if (hp <= 0){
+        if (getHp() <= 0){
             System.out.println("Снайпер " + name + " пал!");
             return;
         }
-        if (numberOfShells <= 0) {
-            System.out.println("Снайпер " + name +" нет боеприпасов");
-            return;
+        if (numberOfShells < maxNumberOfShells && numberOfShells <= 0) {
+            for (AbstractUnit unit : teamFriend) {
+                if (unit.getInfo().equals("Крестьянин") && ((Peasant) unit).opportunityToGiveShells == true) {
+                    unit.getSheells();
+                    return;
+                } else if (numberOfShells <= 0)  {
+                    System.out.println(name + " у меня нет боеприпасов!!!");
+                    return;
+                }
+            }
         }
 
         AbstractUnit enemy = searchForEnemy(teamEnemy);
@@ -68,10 +69,8 @@ public class Sniper extends AbstractUnit {
     }
 
     @Override
-    public boolean needHp() {
-        if (this.hp < this.maxHP){
-            super.callNeedHp = true;
-        }
-        return callNeedHp;
+    public void getResurrection() {
+        super.getResurrection();
+        System.out.println(name + "  Я ожил !");
     }
 }

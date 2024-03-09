@@ -7,13 +7,12 @@ import java.util.ArrayList;
 
 public abstract class AbstractUnit implements InterfaceStep{
 
-    protected  boolean callNeedHp;
     protected String name;
     protected int damage;
     protected int armor;
     protected String weapon;
-    protected int hp;
-    protected  int maxHP;
+    private int hp;
+    private int maxHP;
     protected int speed;
     public String className;
     public Position position;
@@ -65,8 +64,11 @@ public abstract class AbstractUnit implements InterfaceStep{
         return this.hp;
     }
 
-    public void getHeal(){
+    public int getMaxHP(){return this.maxHP;}
 
+    public void getHeal(){
+        this.hp += 1;
+        System.out.println(this.name + " меня полечили");
     }
 
     public String getInfo(){
@@ -75,12 +77,13 @@ public abstract class AbstractUnit implements InterfaceStep{
     public boolean needSheells(){
         return false;
     }
-
     public void getSheells(){
     }
-
-    public boolean needHp() {
-        return false;
+    public void getResurrection() {
+        hp = maxHP;
     }
 
+    public String getName(){
+        return name;
+    }
 }

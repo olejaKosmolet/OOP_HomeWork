@@ -17,16 +17,10 @@ public class Peasant extends AbstractUnit {
         super.getHit(damage);
     }
 
-    @Override
-    public void getHeal() {
-        hp += maxHP;
-        System.out.println(name + " меня полечили");
-    }
-
 
     @Override
     public void step(ArrayList<AbstractUnit> enemy, ArrayList<AbstractUnit> friend) {
-        if (hp<=0) return;
+        if (getHp()<=0) return;
 
         for (AbstractUnit unit : friend){
             if (unit.getInfo().equals("Снайпер") || unit.getInfo().equals("Арбалетчик")){
@@ -44,10 +38,9 @@ public class Peasant extends AbstractUnit {
     }
 
     @Override
-    public boolean needHp() {
-        if (this.hp < this.maxHP){
-            super.callNeedHp = true;
-        }
-        return callNeedHp;
+    public void getResurrection() {
+        super.getResurrection();
+        System.out.println(name + "  Я ожил !");
     }
+
 }

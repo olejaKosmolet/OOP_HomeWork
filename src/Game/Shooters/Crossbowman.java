@@ -7,12 +7,14 @@ import Game.Warriors.Peasant;
 import java.util.ArrayList;
 
 public class Crossbowman extends AbstractUnit {
-    int numberOfShells;
+    protected int numberOfShells;
+    protected int maxNumberOfShells;
 
     public Crossbowman(String name, int x, int y, int numberOfShells) {
         super(new Position(x,y), name, 3, "crossbow", 50, 3, 3, false);
 
         this.numberOfShells = numberOfShells;
+        this.maxNumberOfShells = this.numberOfShells = numberOfShells;
 
     }
     @Override
@@ -23,13 +25,7 @@ public class Crossbowman extends AbstractUnit {
 
     @Override
     public String toString() {
-        return super.toString() + ", \u27b6 " + numberOfShells;
-    }
-
-    @Override
-    public void getHeal() {
-        hp += maxHP;
-        System.out.println(name + " меня полечили");
+        return super.toString() + " | \u27b6 " + numberOfShells;
     }
 
     @Override
@@ -40,22 +36,21 @@ public class Crossbowman extends AbstractUnit {
     // возможно из-за метода расчёта урона не заработает !!!
     @Override
     public void step(ArrayList<AbstractUnit> teamEnemy, ArrayList<AbstractUnit> teamFriend) {
-        if (hp <= 0){
+        if (getHp() <= 0){
             System.out.println("Арбалетчик " + name + " пал!");
             return;
         }
-        if (numberOfShells <= 0) {
+        if (numberOfShells < maxNumberOfShells || numberOfShells <= 0) {
             for (AbstractUnit unit : teamFriend) {
                 if (unit.getInfo().equals("Крестьянин") && ((Peasant) unit).opportunityToGiveShells == true) {
-                    numberOfShells++;
-                    System.out.println("Арбалетчик " + name + " получил болт");
-                } else  {
+                    unit.getSheells();
+                    return;
+                } else if (numberOfShells <= 0)  {
                     System.out.println(name + " у меня нет боеприпасов!!!");
                     return;
                 }
             }
         }
-
         AbstractUnit enemy = searchForEnemy(teamEnemy);
         enemy.getHit(this.damage);
         numberOfShells --;
@@ -67,10 +62,8 @@ public class Crossbowman extends AbstractUnit {
     }
 
     @Override
-    public boolean needHp() {
-        if (this.hp < this.maxHP){
-            super.callNeedHp = true;
-        }
-        return callNeedHp;
+    public void getResurrection() {
+        super.getResurrection();
+        System.out.println(name + "  Я ожил !");
     }
 }
