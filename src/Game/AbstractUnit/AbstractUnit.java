@@ -30,7 +30,7 @@ public abstract class AbstractUnit implements InterfaceStep{
 
     @Override
     public String toString() {
-       return getInfo()+ " _ " + name + " | \u2665 " + hp + " | ⚔ " + damage + " | \uD83D\uDEE1\uFE0F" + armor;
+       return getInfo()+ " " + name + " | \u2665 " + hp + " | ⚔ " + damage + " | \uD83D\uDEE1\uFE0F" + armor;
     }
 
     public void getHit(int damage){

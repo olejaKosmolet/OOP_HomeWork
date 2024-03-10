@@ -20,6 +20,10 @@ abstract public class Warriors extends AbstractUnit {
         if (getHp()<=0) return;
 
         AbstractUnit target = super.searchForEnemy(enemy);
+        if (target == null){
+            return;
+        }
+
         if (position.distanceToTarget(target.position) < 2){
             target.getHit(this.damage);
             return;

@@ -59,7 +59,9 @@ abstract public class Shooters extends AbstractUnit {
         }
 
         AbstractUnit enemy = searchForEnemy(teamEnemy);
-        enemy.getHit(this.damage);
-        numberOfShells --;
+        if (enemy != null){
+            enemy.getHit(this.damage);
+            numberOfShells --;
+        }
     }
 }
