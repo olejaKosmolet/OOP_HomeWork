@@ -34,7 +34,9 @@ public abstract class AbstractUnit implements InterfaceStep{
     }
 
     public void getHit(int damage){
-        hp -= damage;
+        hp -= damage - armor;
+        armor--;
+        if (armor < 0) armor = 0;
         if (hp < 0)  hp = 0;
         if (hp >= maxHP) hp = maxHP;
     }
@@ -79,8 +81,13 @@ public abstract class AbstractUnit implements InterfaceStep{
     }
     public void getSheells(){
     }
+
     public void getResurrection() {
         hp = maxHP;
+        System.out.println(name + "  Я ожил !");
+    }
+    public int getDamage(){
+        return damage;
     }
 
     public String getName(){

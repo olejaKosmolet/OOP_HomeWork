@@ -38,9 +38,8 @@ package Game;
 import Game.AbstractUnit.AbstractUnit;
 import Game.Mage.Monk;
 import Game.Mage.Witch;
-import Game.Shooters.Crossbowman;
 import Game.Shooters.Sniper;
-import Game.Warriors.Peasant;
+import Game.Shooters.Crossbowman;
 import Game.Warriors.Rogue;
 import Game.Warriors.Spearman;
 
@@ -77,12 +76,12 @@ public class Main {
             }
             if (summHp1 < 1){
                 System.out.println("Победили силы тьмы");
-                break;
+                return;
             }
 
             else if (summHp2 < 1){
                 System.out.println("Победили силы света");
-                break;
+                return;
             }
 
 

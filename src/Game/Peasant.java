@@ -1,4 +1,4 @@
-package Game.Warriors;
+package Game;
 
 import Game.AbstractUnit.AbstractUnit;
 import Game.Place.Position;
@@ -9,7 +9,7 @@ public class Peasant extends AbstractUnit {
     public boolean opportunityToGiveShells;
 
     public Peasant(String name, int x, int y) {
-        super(new Position(x, y), name, 3, "sickle" , 10, 0, 1, false);
+        super(new Position(x, y), name, 3, "hands" , 10, 0, 0, false);
     }
 
     @Override
@@ -35,12 +35,6 @@ public class Peasant extends AbstractUnit {
     @Override
     public String getInfo() {
         return "Крестьянин";
-    }
-
-    @Override
-    public void getResurrection() {
-        super.getResurrection();
-        System.out.println(name + "  Я ожил !");
     }
 
 }
